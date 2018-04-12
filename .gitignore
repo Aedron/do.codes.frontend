@@ -4,3 +4,6 @@
 /server/target/debug/
 .idea/
 /node_modules/
+.cache/
+dist/
+
