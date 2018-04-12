@@ -1,0 +1,17 @@
+{
+  "presets": [
+    ["react"],
+    ["env", {
+      "useBuiltIns": "entry",
+      "targets": {
+        "browsers": ["last 2 Chrome versions"]
+      }
+    }]
+  ],
+  "plugins": [
+    ["transform-decorators-legacy"],
+    ["transform-class-properties"],
+    ["mobx-deep-action"],
+    ["jsx-if-directive"]
+  ]
+}
