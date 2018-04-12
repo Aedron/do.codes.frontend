@@ -2,3 +2,4 @@
 /target
 **/*.rs.bk
 /server/target/debug/
+.idea/
