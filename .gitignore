@@ -3,3 +3,4 @@
 **/*.rs.bk
 /server/target/debug/
 .idea/
+/node_modules/
