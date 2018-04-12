@@ -7,7 +7,7 @@ import "./style/index.scss";
 function App() {
   return (
     <div id="app">
-      Hello
+      <img src="./img/Group 2.svg" />
     </div>
   )
 }
