@@ -4,11 +4,14 @@ import NavButton from "../NavButton";
 
 import "./index.scss";
 
+import DO from '../../static/do.svg';
+import CODES from '../../static/codes.svg';
+
 
 
 class Nav extends Component {
   state = {
-    show: false
+    show: true
   };
 
   handleToggleShow = () => {
@@ -21,7 +24,6 @@ class Nav extends Component {
     const scale = show ?
       Math.sqrt(innerWidth * innerWidth + innerHeight * innerHeight) / 55 * 2 + 1 : 1;
 
-
     return (
       <div className="nav-container">
         <NavButton
@@ -29,12 +31,13 @@ class Nav extends Component {
           showNav={show}
           onClick={this.handleToggleShow}
         />
+        <div className="slogan">
+        </div>
         <div
           key={1}
-          className={`nav${show ? ' show' : ''}`}
+          className={`nav-bg${show ? ' show' : ''}`}
           style={{ transform: `scale(${scale})` }}
-        >
-        </div>
+        />
       </div>
     );
   }

@@ -13,9 +13,19 @@
       opacity: 0.2;
     }
   }
+  &.showNav {
+    transform: rotate(3 * 45deg);
+  }
+  &.showNav.pointed {
+    transform: scale(1.2) rotate(45deg);
+  }
 
   circle {
     position: absolute;
+    transition: all ease-out 300ms;
+  }
+
+  rect {
     transition: all ease-out 300ms;
   }
 }

@@ -8,15 +8,36 @@ $nav-btn-size: 55px;
   position: absolute;
   right: 0;
   top: 0;
+  user-select: none;
+
+  .slogan {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 11;
+    & > img {
+      height: 100px;
+      width: auto;
+    }
+    .slogan-i {
+
+    }
+    .slogan-do {
+
+    }
+    .slogan-codes {
+
+    }
+  }
 }
 
-.nav {
+.nav-bg {
   position: absolute;
   right: 30px;
   top: 30px;
   width: $nav-btn-size;
   height: $nav-btn-size;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(23, 50, 100, 0.85);
   border-radius: 100%;
   z-index: 10;
   transition: all ease 500ms;
