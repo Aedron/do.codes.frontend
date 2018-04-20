@@ -7,7 +7,7 @@ import "./index.scss";
 
 class Nav extends Component {
   state = {
-    show: true
+    show: false
   };
 
   handleToggleShow = () => {

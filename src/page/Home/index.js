@@ -1,16 +1,17 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStore } from '../../store';
+
+import { Posts } from '../../component';
 
 
 
-@withStore
-class Home extends Component {
-  render() {
-    console.log(this.props);
-    return (null)
-  }
+function Home() {
+  return (
+    <div id="home">
+      <Posts/>
+    </div>
+  )
 }
 
 
