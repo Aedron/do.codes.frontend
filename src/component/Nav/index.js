@@ -4,10 +4,6 @@ import NavButton from "../NavButton";
 
 import "./index.scss";
 
-import DO from '../../static/do.svg';
-import CODES from '../../static/codes.svg';
-
-
 
 class Nav extends Component {
   state = {

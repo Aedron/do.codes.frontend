@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { observer } from 'mobx-react';
 
 import Home from './page/Home';
 import Nav from './component/Nav';
@@ -17,4 +18,4 @@ function App() {
 }
 
 
-export default App;
+export default observer(App);
