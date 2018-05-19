@@ -10,6 +10,9 @@ import './index.scss';
 
 @withStore
 class Posts extends Component {
+  componentDidMount() {
+    // return this.props.store.fetchPosts();
+  }
   render() {
     return (
       <div className="posts">

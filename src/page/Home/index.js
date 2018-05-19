@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { Posts } from '../../component';
 
 
-
 function Home() {
   return (
     <div id="home">
