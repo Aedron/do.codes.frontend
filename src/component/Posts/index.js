@@ -1,14 +1,13 @@
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import { withStore } from '../../store';
+import { observer } from 'mobx-react';
+import { store } from "../../store";
 
 import './index.scss';
 
 
 
-@withStore
+@observer
 class Posts extends Component {
   componentDidMount() {
     // return this.props.store.fetchPosts();

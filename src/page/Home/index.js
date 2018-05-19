@@ -1,17 +1,20 @@
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+import store from '../../store';
 
-import { Posts } from '../../component';
+import Nav from '../../component/Nav';
+import Posts from '../../component/Posts';
 
 
 function Home() {
   return (
     <div id="home">
-      <Posts/>
+      <Nav />
+      <Posts />
     </div>
   )
 }
 
 
-export default Home;
+export default observer(Home);

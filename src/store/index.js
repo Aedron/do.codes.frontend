@@ -7,6 +7,15 @@ import { hoc, http } from '../utils';
 
 
 class Store {
+  @observable view = 'init';
+  @action changeView = (view) => {
+    this.view = view;
+  };
+  @observable showNav = false;
+  @action toggleShowNav = () => {
+    this.showNav = !this.showNav;
+  };
+
   @observable
   posts = [];
   @action

@@ -5,6 +5,8 @@ import { observer } from 'mobx-react';
 import Home from './page/Home';
 import Nav from './component/Nav';
 
+
+
 import './style/index.scss';
 
 

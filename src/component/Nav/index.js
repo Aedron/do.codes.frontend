@@ -1,6 +1,8 @@
 
 import React, {Component} from 'react';
-import NavButton from "../NavButton";
+import {observer} from "mobx-react/index";
+import { store } from '../../store';
+import NavButton from '../NavButton';
 
 import "./index.scss";
 
@@ -16,10 +18,9 @@ import CLOUD from '../../static/pics/cloud.svg';
 
 
 
-
+@observer
 class Nav extends Component {
   state = {
-    show: true,
     width: window.innerWidth,
     height: window.innerHeight
   };
@@ -28,9 +29,6 @@ class Nav extends Component {
     window.addEventListener('resize', this.handleResize);
   };
 
-  handleToggleShow = () => {
-    this.setState({ show: !this.state.show });
-  };
   handleResize = () => {
     this.setState({
       width: window.innerWidth,
@@ -39,7 +37,9 @@ class Nav extends Component {
   };
 
   render() {
-    const { show, width, height } = this.state;
+    const { showNav, view } = store;
+    const show = view === 'init' ? true : showNav;
+    const { width, height } = this.state;
     const { innerWidth, innerHeight } = window;
     const scale = show ?
       Math.sqrt(innerWidth * innerWidth + innerHeight * innerHeight) / 55 * 2 + 1 : 1;
@@ -64,11 +64,7 @@ class Nav extends Component {
 
     return (
       <div className={`nav-container${show ? ' show' : ''}`}>
-        <NavButton
-          key={0}
-          showNav={show}
-          onClick={this.handleToggleShow}
-        />
+        <NavButton />
         <div
           className="slogan"
           style={containerStyle}

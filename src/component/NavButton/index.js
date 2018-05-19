@@ -1,16 +1,14 @@
 
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+
+import { store } from '../../store';
 
 import "./index.scss";
 
 
+@observer
 class NavButton extends Component {
-  static propTypes = {
-    showNav: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired
-  };
-
   offsets = [
     [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ] ],
     [ [ 2, 1 ], [ 2, 2 ], [ 2, 3 ] ],
@@ -30,8 +28,9 @@ class NavButton extends Component {
 
   render() {
     const { isPointed } = this.state;
-    const { showNav } = this.props;
-    return [
+    const { view, showNav } = store;
+
+    return view === 'init' ? null : [
       <p
         key={0}
         className={`nav-button-text${isPointed ? ' pointed' : ''}`}
@@ -51,7 +50,7 @@ class NavButton extends Component {
         className={`nav-button${isPointed ? ' pointed' : ''}${showNav ? ' showNav' : ''}`}
         onMouseEnter={this.handlePointIn}
         onMouseLeave={this.handlePointOut}
-        onClick={this.props.onClick}
+        onClick={store.toggleShowNav}
       >
         <g>
           {
