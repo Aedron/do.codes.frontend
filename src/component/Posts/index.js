@@ -14,8 +14,8 @@ class Posts extends Component {
   }
   render() {
     return (
-      <div className="posts">
-
+      <div if={store.view === 'posts'} className="posts">
+        <h1>Hello</h1>
       </div>
     );
   }

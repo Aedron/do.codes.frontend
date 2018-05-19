@@ -28,9 +28,10 @@ class NavButton extends Component {
 
   render() {
     const { isPointed } = this.state;
-    const { view, showNav } = store;
+    const { showNav } = store;
+    // const showNav = true;
 
-    return view === 'init' ? null : [
+    return [
       <p
         key={0}
         className={`nav-button-text${isPointed ? ' pointed' : ''}`}

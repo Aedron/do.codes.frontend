@@ -2,19 +2,20 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-import Home from './page/Home';
 import Nav from './component/Nav';
+import Home from './component/Posts';
 
 
 
 import './style/index.scss';
+import Posts from "./component/Posts";
 
 
 function App() {
   return (
     <div id="app">
       <Nav />
-      <Home />
+      <Posts />
     </div>
   );
 }

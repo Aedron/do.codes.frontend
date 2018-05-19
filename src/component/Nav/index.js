@@ -35,6 +35,13 @@ class Nav extends Component {
       height: window.innerHeight
     });
   };
+  goTo = (view) => {
+    if (view === store.view) {
+      store.toggleShowNav();
+    } else {
+      store.changeView(view);
+    }
+  };
 
   render() {
     const { showNav, view } = store;
@@ -64,12 +71,12 @@ class Nav extends Component {
 
     return (
       <div className={`nav-container${show ? ' show' : ''}`}>
-        <NavButton />
+        <NavButton if={store.view !== 'init'} />
         <div
           className="slogan"
           style={containerStyle}
         >
-          <img className="d0" src={D0} />
+          <img className="d0" src={D0} onClick={() => this.goTo('posts')} />
           <img className="o0" src={O0} />
           <img className="point" src={POINT} />
           <img className="c" src={C} />
