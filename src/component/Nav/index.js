@@ -12,6 +12,7 @@ import O1 from '../../static/pics/o1.svg';
 import D1 from '../../static/pics/d1.svg';
 import E from '../../static/pics/e.svg';
 import S from '../../static/pics/s.svg';
+import CLOUD from '../../static/pics/cloud.svg';
 
 
 
@@ -62,7 +63,7 @@ class Nav extends Component {
     }
 
     return (
-      <div className="nav-container">
+      <div className={`nav-container${show ? ' show' : ''}`}>
         <NavButton
           key={0}
           showNav={show}
@@ -80,6 +81,9 @@ class Nav extends Component {
           <img className="d1" src={D1} />
           <img className="e" src={E} />
           <img className="s" src={S} />
+          <img className="cloud0" src={CLOUD} />
+          <img className="cloud1" src={CLOUD} />
+          <img className="cloud2" src={CLOUD} />
         </div>
         <div
           key={1}

@@ -10,7 +10,12 @@ $nav-btn-size: 55px;
   top: 0;
   user-select: none;
 
+  &.show .slogan {
+    opacity: 1;
+  }
   .slogan {
+    opacity: 0;
+    transition: all ease 300ms;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -21,19 +26,35 @@ $nav-btn-size: 55px;
       width: 10%;
       height: auto;
       position: absolute;
+      transition: all ease 300ms;
     }
     .d0, .point, .c, .d1, .s {
       cursor: pointer;
+      &:hover {
+      }
     }
     .d0 {
       left: 13%;
       top: 0;
       width: 16%;
+      animation: d0 ease-in-out 4s infinite;
+      @keyframes d0 {
+        0% { transform: none; }
+        50% { transform: translateY(-40px) translateX(-20px); }
+        100% { transform: none; }
+      }
     }
     .o0 {
       left: 38%;
       top: 0;
       width: 9%;
+      animation: o0 ease-in-out 4s infinite;
+      animation-delay: 200ms;
+      @keyframes o0 {
+        0% { transform: none; }
+        50% { transform: translateY(-40px) translateX(20px); }
+        100% { transform: none; }
+      }
     }
     .point {
       left: 60%;
@@ -63,6 +84,21 @@ $nav-btn-size: 55px;
       left: 82%;
       bottom: 35%;
       width: 8.5%;
+    }
+    .cloud0 {
+      left: 10%;
+      top: 6%;
+      width: 22%;
+    }
+    .cloud1 {
+      left: 57%;
+      top: 6%;
+      width: 15%;
+    }
+    .cloud2 {
+      left: 80%;
+      bottom: 60%;
+      width: 20%;
     }
   }
 }
