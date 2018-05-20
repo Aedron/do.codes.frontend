@@ -34,7 +34,7 @@ class NavButton extends Component {
     return [
       <p
         key={0}
-        className={`nav-button-text${isPointed ? ' pointed' : ''}`}
+        className={`nav-button-text${isPointed ? ' pointed' : ''}${showNav ? ' showNav' : ' hideNav'}`}
       >
         {
           (showNav ? ['B', 'A', 'C', 'K'] : ['M', 'E', 'N', 'U'])
@@ -48,7 +48,7 @@ class NavButton extends Component {
       </p>,
       <svg
         key={1}
-        className={`nav-button${isPointed ? ' pointed' : ''}${showNav ? ' showNav' : ''}`}
+        className={`nav-button${isPointed ? ' pointed' : ''}${showNav ? ' showNav' : ' hideNav'}`}
         onMouseEnter={this.handlePointIn}
         onMouseLeave={this.handlePointOut}
         onClick={store.toggleShowNav}
