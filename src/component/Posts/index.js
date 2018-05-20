@@ -16,23 +16,41 @@ class Posts extends Component {
 
   renderPost = (post, index) => {
     const { title, content, cover } = post;
-    const { innerWidth, innerHeight } = window;
+    const { width, height } = store;
 
     return (
-      <div
+    <div
       className="post"
-      style={{
-        width: innerWidth,
-        height: innerHeight
-      }}
+      style={{ width, height }}
       key={index}
     >
-      <div className="post-bg"/>
-      <div className="post-cover" style={{ backgroundImage: `url("${cover}")` }}/>
-      <div className="post-info">
-        <h1>{title}</h1>
-        <p>{content}</p>
-      </div>
+      <Parallax
+        offsetYMax={"80%"}
+        offsetYMin={"-30%"}
+        slowerScrollRate
+        tag="figure"
+        className="post-bg"
+      />
+      <Parallax
+        offsetYMax={"47%"}
+        offsetYMin={"-10%"}
+        slowerScrollRate
+        tag="figure"
+        className="post-cover"
+      >
+        <div className="post-bg-inner" style={{ backgroundImage: `url("${cover}")` }}/>
+      </Parallax>
+      <Parallax
+        offsetYMax={"10%"}
+        offsetYMin={"-60%"}
+        tag="figure"
+        className="post-info"
+      >
+        <div className="post-info-inner">
+          <h1>{title}</h1>
+          <p>{content}</p>
+        </div>
+      </Parallax>
     </div>
     );
   };

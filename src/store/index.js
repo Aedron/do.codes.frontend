@@ -7,6 +7,10 @@ import { hoc, http } from '../utils';
 
 
 class Store {
+  constructor() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
   @observable view = 'posts';
   @action changeView = (view) => {
     this.view = view;
@@ -24,7 +28,14 @@ class Store {
     const posts = await http.getPosts();
     this.posts = posts || [];
     console.log(this.posts);
-  }
+  };
+
+  @observable width = window.innerWidth;
+  @observable height = window.innerHeight;
+  @action handleResize = () => {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+  };
 }
 
 
