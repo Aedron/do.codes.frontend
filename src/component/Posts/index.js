@@ -41,8 +41,8 @@ class Posts extends Component {
         <div className="post-bg-inner" style={{ backgroundImage: `url("${cover}")` }}/>
       </Parallax>
       <Parallax
-        offsetYMax={"10%"}
-        offsetYMin={"-60%"}
+        offsetYMax={"80%"}
+        offsetYMin={"-50%"}
         tag="figure"
         className="post-info"
       >
