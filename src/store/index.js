@@ -22,9 +22,11 @@ class Store {
 
   @observable posts = null;
   @action fetchPosts = async () => {
-    const posts = await http.getPosts();
-    this.posts = posts || mockPosts || [];
-    console.log(this.posts);
+    try {
+      this.posts = await http.getPosts();
+    } catch (e) {
+        this.posts = mockPosts;
+    }
   };
 
   @observable width = window.innerWidth;

@@ -1,50 +1,13 @@
 
 
 .posts {
+  max-width: 1260px;
+  min-height: 450px;
+  margin: 0 auto;
+  display: flex;
+  color: #000;
   width: 100%;
-  height: 100%;
-  z-index: 1;
-
-  .post {
-    text-align: center;
-    margin: 0;
-    position: relative;
-    .post-bg {
-      width: 66%;
-      height: 60%;
-      left: 17%;
-      top: 12%;
-      background-color: rgb(232, 237, 240);
-      margin: 0 auto;
-      position: absolute;
-    }
-    .post-cover {
-      width: 56%;
-      height: 46%;
-      position: absolute;
-      left: 22%;
-      top: 32%;
-      div {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-      }
-    }
-    .post-info {
-      width: 34%;
-      height: 40%;
-      position: absolute;
-      left: 44%;
-      top: 26%;
-      & > div, .post-info-inner {
-        width: 100%;
-        height: 100%;
-      }
-      .post-info-inner {
-        background-color: white;
-        padding: 22px 32px;
-        text-align: left;
-      }
-    }
-  }
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
-import {store, withStore} from "../../store";
+import {withStore} from "../../store";
+
+import Post from './Post';
 
 import './index.scss';
 
@@ -13,29 +15,17 @@ class Posts extends Component {
         return this.props.store.fetchPosts();
     }
 
-    static renderPost = (post, index) => {
-        const {title, content, cover} = post;
-        const {width, height} = store;
-
-        return (
-            <div
-                className="post"
-                style={{width, height}}
-                key={index}
-            >
-
-            </div>
-        );
-    };
-
     render() {
-        const { posts } = this.props.store;
+        const { store } = this.props;
+        const { posts } = store;
         return (
             <div
-                if={store.view === 'posts'}
+                if={store.view === 'posts' && posts}
                 className="posts"
             >
-                {posts.map(Posts.renderPost)}
+                {posts.map(post => (
+                    <Post key={post.title} post={post} />
+                ))}
             </div>
         );
     }
