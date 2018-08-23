@@ -13,7 +13,7 @@ class Posts extends Component {
         return this.props.store.fetchPosts();
     }
 
-    renderPost = (post, index) => {
+    static renderPost = (post, index) => {
         const {title, content, cover} = post;
         const {width, height} = store;
 
@@ -29,9 +29,13 @@ class Posts extends Component {
     };
 
     render() {
+        const { posts } = this.props.store;
         return (
-            <div if={store.view === 'posts'} className="posts">
-
+            <div
+                if={store.view === 'posts'}
+                className="posts"
+            >
+                {posts.map(Posts.renderPost)}
             </div>
         );
     }
