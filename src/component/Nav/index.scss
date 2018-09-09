@@ -1,25 +1,21 @@
 
-$nav-btn-size: 55px;
+@import "../../style/variable";
 
 .nav-container {
+  position: fixed;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: fixed;
-  right: 0;
-  top: 0;
   user-select: none;
-  z-index: 2;
 
-  .hideNav {
-    color: black;
-    fill: black;
-    border-color: black;
-  }
-  &.show .slogan {
-    display: block;
+  &.show {
+    z-index: 11;
+    .slogan {
+      display: block;
+    }
   }
   .slogan {
+    z-index: 11;
     display: none;
     opacity: 0;
     transition: all ease 600ms;
@@ -28,7 +24,6 @@ $nav-btn-size: 55px;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 11;
     animation: slogan 300ms forwards ease-in-out;
     @keyframes slogan {
       0% { opacity: 0; }
@@ -187,7 +182,6 @@ $nav-btn-size: 55px;
   height: $nav-btn-size;
   background-color: #FDDC3D;
   border-radius: 100%;
-  z-index: 10;
   transition: all ease 500ms;
   opacity: 0;
 
@@ -196,16 +190,3 @@ $nav-btn-size: 55px;
   }
 }
 
-.nav-button {
-  width: $nav-btn-size;
-  height: $nav-btn-size;
-  position: absolute;
-  right: 30px;
-  top: 30px;
-  z-index: 12;
-}
-
-.nav-button-text {
-  z-index: 12;
-  transition: all ease-in-out 200ms;
-}

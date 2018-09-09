@@ -7,10 +7,19 @@ import './index.scss';
 
 
 function Post({post}) {
-    const { title, cover, intero, tags } = post;
+    const {
+        created, edited, title,
+        tags, content, cover,
+        comments
+    } = post;
     return (
         <div className="post">
-            {title}
+            <div className="cover-container">
+                <img className="cover" src={cover} alt={title} />
+            </div>
+            <div>
+                {title}
+            </div>
         </div>
     );
 }

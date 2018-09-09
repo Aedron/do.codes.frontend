@@ -54,7 +54,6 @@ function Nav() {
 
   return (
     <div className={`nav-container${show ? ' show' : ''}`}>
-      <NavButton if={store.view !== 'init'} />
       <div
         className="slogan"
         style={containerStyle}
