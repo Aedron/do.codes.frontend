@@ -64,9 +64,11 @@
     }
     .tags {
       white-space:nowrap;
+      height: 24px;
       li {
         display: inline;
         margin: 0 10px;
+        line-height: 24px;
       }
     }
     .intro {
