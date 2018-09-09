@@ -1,8 +1,7 @@
 
-import React from 'react';
 import { observable, action } from 'mobx';
 
-import { hoc, http } from '../utils';
+import { hoc, http, promiseWrapper } from '../utils';
 import { posts as mockPosts } from '../mock';
 
 
@@ -22,11 +21,8 @@ class Store {
 
   @observable posts = null;
   @action fetchPosts = async () => {
-    try {
-      this.posts = await http.getPosts();
-    } catch (e) {
-        this.posts = mockPosts;
-    }
+    const [err, data] = await promiseWrapper(http.getPosts);
+    this.posts = err ? mockPosts : data;
   };
 
   @observable width = window.innerWidth;
