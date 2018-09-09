@@ -25,8 +25,15 @@ async function promiseWrapper(p) {
 }
 
 
+function sliceText(text, max, sunfix="...") {
+    if (text.length < max) return text;
+    return text.slice(0, max) + sunfix;
+}
+
+
 export {
     hoc,
     http,
-    promiseWrapper
+    promiseWrapper,
+    sliceText
 }
