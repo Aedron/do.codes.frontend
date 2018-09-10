@@ -22,7 +22,7 @@ function httpWrapper(p) {
   });
 }
 
-function getPosts() {
+function getPostList() {
   return httpWrapper(
       axios.get(formatURL(`/api/posts`))
   );
@@ -30,5 +30,5 @@ function getPosts() {
 
 
 export {
-  getPosts
+  getPostList
 }

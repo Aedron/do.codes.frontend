@@ -1,21 +1,23 @@
-
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
 
 import Posts from './component/Posts';
 import Post from './component/Post';
-
+import Nav from "./component/Nav";
+import NavButton from "./component/NavButton";
 
 
 const AppRoute = () => (
-  <div>
-    <Router>
+  <Router>
+    <div id="app">
+      <Nav/>
+      <NavButton/>
       <Switch>
         <Route exact path="/" component={Posts}/>
         <Route path="/post/:id" component={Post}/>
       </Switch>
-    </Router>
-  </div>
+    </div>
+  </Router>
 );
 
 

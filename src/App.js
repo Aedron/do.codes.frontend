@@ -12,11 +12,7 @@ import './style/index.scss';
 
 function App() {
     return (
-        <div id="app">
-            <Nav/>
-            <NavButton if={store.view !== 'init'}/>
-            <AppRoute/>
-        </div>
+      <AppRoute/>
     );
 }
 

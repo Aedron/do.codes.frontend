@@ -16,18 +16,18 @@ class Posts extends PureComponent {
 
   componentDidMount() {
     console.log(this.props.store);
-    return this.props.store.fetchPosts();
+    return this.props.store.fetchPostList();
   }
 
   render() {
     const {store} = this.props;
-    const {posts} = store;
+    const {postList} = store;
     return (
       <div
-        if={store.view === 'posts' && posts}
+        if={postList}
         className="posts"
       >
-        {posts.map(Posts.renderPost)}
+        {postList.map(Posts.renderPost)}
       </div>
     );
   }

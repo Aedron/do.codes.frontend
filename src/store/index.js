@@ -10,27 +10,41 @@ class Store {
     window.addEventListener('resize', this.handleResize);
   }
 
-  @observable view = 'posts';
-  @action changeView = (view) => {
-    this.view = view;
-  };
+  /*
+  ** View
+   */
   @observable showNav = false;
-  @action toggleShowNav = () => {
-    this.showNav = !this.showNav;
+  @action toggleShowNav = (show) => {
+    this.showNav = typeof show === "boolean"?
+      show : !this.showNav;
   };
 
-  @observable posts = null;
-  @action fetchPosts = async () => {
-    const [err, data] = await promiseWrapper(http.getPosts);
-    this.posts = err ? mockPosts : data;
-  };
-
+  /*
+  ** Observe window size for rerender canvas
+   */
   @observable width = window.innerWidth;
   @observable height = window.innerHeight;
   @action handleResize = () => {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
   };
+
+  /*
+  ** PostList of Home
+   */
+  @observable postList = null;
+  @action fetchPostList = async () => {
+    const [err, data] = await promiseWrapper(http.getPostList);
+    this.postList = err ? mockPosts : data;
+  };
+
+  /*
+  ** Post Detail
+   */
+  @observable posts = {};
+  @action fetchPosts = async () => {
+
+  }
 }
 
 

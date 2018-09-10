@@ -1,8 +1,9 @@
 
 import React from 'react';
-import {observer} from "mobx-react/index";
+import {observer} from "mobx-react";
+import { withRouter } from 'react-router-dom';
+
 import { store } from '../../store';
-import NavButton from '../NavButton';
 
 import "./index.scss";
 
@@ -17,21 +18,24 @@ import S from '../../static/pics/s.svg';
 import CLOUD from '../../static/pics/cloud.svg';
 
 
-function goTo(view) {
-  if (view === 'github') {
-    return window.open('https://github.com/HuQingyang');
+function goTo(view, history) {
+  const { push, location: { pathname } } = history;
+  switch (view) {
+    case 'github': {
+      return window.open('https://github.com/HuQingyang');
+    }
+    case 'posts': {
+      push('/');
+      break;
+    }
+    default: return;
   }
-  if (view === store.view) {
-    store.toggleShowNav();
-  } else {
-    store.changeView(view);
-  }
+  store.toggleShowNav(false);
 }
 
-function Nav() {
-  const { showNav, view, width, height } = store;
-  const show = view === 'init' ? true : showNav;
-  const scale = show ?
+function Nav({history}) {
+  const { showNav, width, height } = store;
+  const scale = showNav ?
     Math.sqrt(width * width + height * height) / 55 * 2 + 1 : 1;
 
   let containerStyle;
@@ -53,26 +57,26 @@ function Nav() {
   }
 
   return (
-    <div className={`nav-container${show ? ' show' : ''}`}>
+    <div className={`nav-container${showNav ? ' show' : ''}`}>
       <div
         className="slogan"
         style={containerStyle}
       >
-        <img className="d0" src={D0} onClick={goTo.bind(null, 'posts')} />
-        <img className="o0" src={O0} />
-        <img className="point" src={POINT} onClick={goTo.bind(null, 'github')} />
-        <img className="c" src={C} />
-        <img className="o1" src={O1} />
-        <img className="d1" src={D1} />
-        <img className="e" src={E} />
-        <img className="s" src={S} />
-        <img className="cloud0" src={CLOUD} />
-        <img className="cloud1" src={CLOUD} />
-        <img className="cloud2" src={CLOUD} />
+        <img alt="nav" className="d0" src={D0} onClick={goTo.bind(null, 'posts', history)} />
+        <img alt="nav" className="o0" src={O0} />
+        <img alt="nav" className="point" src={POINT} onClick={goTo.bind(null, 'github', history)} />
+        <img alt="nav" className="c" src={C} />
+        <img alt="nav" className="o1" src={O1} />
+        <img alt="nav" className="d1" src={D1} />
+        <img alt="nav" className="e" src={E} />
+        <img alt="nav" className="s" src={S} />
+        <img alt="nav" className="cloud0" src={CLOUD} />
+        <img alt="nav" className="cloud1" src={CLOUD} />
+        <img alt="nav" className="cloud2" src={CLOUD} />
       </div>
       <div
         key={1}
-        className={`nav-bg${show ? ' show' : ''}`}
+        className={`nav-bg${showNav ? ' show' : ''}`}
         style={{ transform: `scale(${scale})` }}
       />
     </div>
@@ -80,4 +84,4 @@ function Nav() {
 }
 
 
-export default observer(Nav);
+export default withRouter(observer(Nav));
