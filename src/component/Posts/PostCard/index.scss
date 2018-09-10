@@ -1,5 +1,5 @@
 
-.post {
+.post-card {
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -11,6 +11,7 @@
   cursor: pointer;
   color: #000;
   position: relative;
+  text-decoration: none;
 
   .cover-container {
     display: table;
@@ -41,7 +42,7 @@
     }
   }
 
-  .post-info {
+  .post-card-info {
     text-align: center;
     width: 100%;
     .title {

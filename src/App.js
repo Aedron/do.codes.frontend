@@ -2,9 +2,8 @@ import React from 'react';
 import {observer} from 'mobx-react';
 
 import Nav from './component/Nav';
-import Home from './component/Posts';
-import Posts from "./component/Posts";
 import NavButton from "./component/NavButton";
+import AppRoute from './route';
 import {store} from "./store";
 
 
@@ -16,7 +15,7 @@ function App() {
         <div id="app">
             <Nav/>
             <NavButton if={store.view !== 'init'}/>
-            <Posts/>
+            <AppRoute/>
         </div>
     );
 }
