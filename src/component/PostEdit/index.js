@@ -44,25 +44,36 @@ class PostEdit extends Component {
     this.setState({ title: e.target.value });
   };
 
+    onChangeTags = e => {
+    this.setState({ tags: e.target.value });
+  };
+
   render() {
-    const { loading, content, title } = this.state;
+    const { loading, content, title, tags } = this.state;
     return (
       <Fragment>
         <div if={loading}>Loading</div>
         <div else className="post-edit">
-          <div className="cover-upload">
-            <i className="fa fa-file-picture-o " />
-            <p>上传封面</p>
-          </div>
           <input
             className="title-editor"
             value={title}
             onChange={this.onChangeTitle}
+            placeholder="Title"
           />
+          <input
+              className="tags-editor"
+              value={tags}
+              onChange={this.onChangeTags}
+              placeholder="Tags"
+          />
+          <div className="cover-upload">
+              <i className="fa fa-file-picture-o " />
+              <p>上传封面</p>
+          </div>
           <Milk
             className="content-editor"
             value={content}
-            onChange={this.onChangeTitle}
+            onChange={this.onChangeContent}
           />
         </div>
       </Fragment>

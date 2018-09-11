@@ -10,10 +10,10 @@
   width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
 
-  .post-card:nth-child(3n + 2) {
-    margin-left: 40px;
-    margin-right: 40px;
-  }
+  //.post-card:nth-child(3n + 2) {
+  //  margin-left: 40px;
+  //  margin-right: 40px;
+  //}
 }
