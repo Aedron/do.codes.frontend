@@ -1,8 +1,52 @@
 
 .post-edit {
-  width: 100%;
-  height: 100%;
   position: fixed;
+  width: 660px;
+  padding: 0;
+  margin: 30px calc(50% - 330px);
+  overflow-y: auto;
+  .cover-upload {
+    background: #f5f5f5;
+    color: gray;
+    min-height: 220px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 60px 0;
+    margin-bottom: 30px;
+    i {
+      font-size: 32px;
+      opacity: 0.8;
+    }
+    p {
+      font-size: 13px;
+      letter-spacing: 0.07em;
+      transition: all ease 300ms;
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    &:hover p {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .title-editor {
+    height: 44px;
+    min-height: 44px;
+    display: block;
+    width: 100%;
+    border: 0;
+    font-size: 32px;
+    line-height: 1.4;
+    font-weight: 600;
+    font-synthesis: style;
+    outline: none;
+    box-shadow: none;
+  }
   .milk {
     width: 100%;
   }
