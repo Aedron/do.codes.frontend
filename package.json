@@ -12,9 +12,11 @@
     "axios": "^0.18.0",
     "mobx": "^4.1.1",
     "mobx-react": "^5.0.0",
+    "ramda": "^0.25.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-fullpage": "^0.1.18",
+    "react-milkdown": "^1.1.1",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
