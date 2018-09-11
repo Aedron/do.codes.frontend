@@ -13,7 +13,10 @@ import "./index.scss";
 class PostEdit extends Component {
   state = {
     loading: true,
-    content: ""
+    title: "",
+    content: "",
+    tags: "",
+    cover: ""
   };
 
   get isNew() {
@@ -43,6 +46,10 @@ class PostEdit extends Component {
       <Fragment>
         <div if={loading}>Loading</div>
         <div else className="post-edit">
+          <div className="cover-upload">
+            <i className="fas fa-cloud-upload-alt" />
+            <p>上传封面</p>
+          </div>
           <Milk
             className="content-editor"
             value={content}
