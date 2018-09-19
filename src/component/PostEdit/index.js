@@ -4,8 +4,10 @@ import { observer } from "mobx-react";
 import { withRouter } from "react-router-dom";
 
 import { withStore } from "../../store";
+import { upload } from "../../utils/qiniu";
 
 import "./index.scss";
+import { noop } from "../../utils";
 
 @withStore
 @withRouter
@@ -19,6 +21,8 @@ class PostEdit extends Component {
     cover: ""
   };
 
+  input = null;
+
   get isNew() {
     return !this.props.match.params.id;
   }
@@ -29,6 +33,7 @@ class PostEdit extends Component {
     } else {
       this.getPostData();
     }
+    this.input.addEventListener("change", this.onUploadChange);
   }
 
   getPostData = () => {
@@ -44,14 +49,36 @@ class PostEdit extends Component {
     this.setState({ title: e.target.value });
   };
 
-    onChangeTags = e => {
+  onChangeTags = e => {
     this.setState({ tags: e.target.value });
+  };
+
+  onUploadCover = () => {
+    this.input.click();
+  };
+
+  onUploadChange = () => {
+    const cover = this.input.files[0];
+    if (!cover) return;
+    debugger;
+    return upload(cover, cover.name, null, {
+      next: console.log,
+      error: console.log,
+      complete: console.log
+    });
   };
 
   render() {
     const { loading, content, title, tags } = this.state;
     return (
       <Fragment>
+        <input
+          style={{ display: "none" }}
+          ref={i => (this.input = i)}
+          type="file"
+          name="pic"
+          accept="image/*"
+        />
         <div if={loading}>Loading</div>
         <div else className="post-edit">
           <input
@@ -61,14 +88,14 @@ class PostEdit extends Component {
             placeholder="Title"
           />
           <input
-              className="tags-editor"
-              value={tags}
-              onChange={this.onChangeTags}
-              placeholder="Tags"
+            className="tags-editor"
+            value={tags}
+            onChange={this.onChangeTags}
+            placeholder="Tags"
           />
-          <div className="cover-upload">
-              <i className="fa fa-file-picture-o " />
-              <p>上传封面</p>
+          <div className="cover-upload" onClick={this.onUploadCover}>
+            <i className="fa fa-file-picture-o " />
+            <p>上传封面</p>
           </div>
           <Milk
             className="content-editor"
