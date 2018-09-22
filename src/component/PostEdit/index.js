@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
-import Milk from "react-milkdown";
 import { observer } from "mobx-react";
 import { withRouter } from "react-router-dom";
 
+import Editor from "../Editor";
 import { withStore } from "../../store";
 import { upload, getCDNLink } from "../../utils/qiniu";
 
@@ -17,7 +17,9 @@ class PostEdit extends Component {
     title: "",
     content: "",
     tags: "",
-    cover: ""
+    cover: "",
+    maxSize: false,
+    preview: true
   };
 
   input = null;
@@ -107,11 +109,7 @@ class PostEdit extends Component {
             <i className="fa fa-file-picture-o " />
             <p>上传封面</p>
           </div>
-          <Milk
-            className="content-editor"
-            value={content}
-            onChange={this.onChangeContent}
-          />
+          <Editor content={content} onChange={this.onChangeContent} />
         </div>
       </Fragment>
     );
