@@ -15,7 +15,9 @@ class PostEdit extends Component {
   state = {
     loading: true,
     title: "",
-    content: "",
+    content: {
+      markdown: ""
+    },
     tags: "",
     cover: "",
     maxSize: false,
@@ -43,7 +45,6 @@ class PostEdit extends Component {
 
   onChangeContent = content => {
     this.setState({ content });
-    return content;
   };
 
   onChangeTitle = e => {

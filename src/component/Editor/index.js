@@ -10,14 +10,21 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 
 class Editor extends Component {
   static propTypes = {
-    content: PropTypes.string.isRequired,
+    content: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired
   };
 
   state = {
     maxSize: false,
-    preview: true
+    preview: true,
+    showUploader: false
   };
+
+  input = null;
+
+  editorState = null;
+
+  insertCallback = null;
 
   converter = new Showdown.Converter({
     tables: true,
@@ -28,36 +35,23 @@ class Editor extends Component {
 
   commands = [
     [
-      ReactMdeCommands.headerCommand,
+      {
+        ...ReactMdeCommands.headerCommand,
+        buttonContentBuilder: ({ iconProvider }) => iconProvider("header")
+      },
       ReactMdeCommands.boldCommand,
       ReactMdeCommands.italicCommand,
       ReactMdeCommands.strikethroughCommand
     ],
     [
       {
-        buttonContentBuilder: ({ iconProvider }) => iconProvider("link"),
-        buttonProps: { "aria-label": "Insert a link" },
+        buttonContentBuilder: ({ iconProvider }) => iconProvider("image"),
+        buttonProps: { "aria-label": "插入图片" },
         execute: state => {
-          const { text, selection } = DraftUtil.getMarkdownStateFromDraftState(
-            state
-          );
-          const { newText, insertionLength } = MarkdownUtil.insertText(
-            text,
-            "![",
-            selection.start
-          );
-          const finalText = MarkdownUtil.insertText(
-            newText,
-            "](image-url)",
-            selection.end + insertionLength
-          ).newText;
-
-          return DraftUtil.buildNewDraftState(state, {
-            text: finalText,
-            selection: {
-              start: selection.start + insertionLength,
-              end: selection.end + insertionLength
-            }
+          this.editorState = state;
+          this.input.click();
+          return new Promise((resolve, reject) => {
+            this.insertCallback = [resolve, resolve];
           });
         }
       },
@@ -89,6 +83,49 @@ class Editor extends Component {
     ]
   ];
 
+  componentDidMount() {
+    this.input.addEventListener("change", this.onUploadChange);
+  }
+
+  onUploadChange = async () => {
+    const [resolve, reject] = this.insertCallback;
+    const image = this.input.files[0];
+    if (!image) return resolve();
+    try {
+      await upload(image, image.name, null, {
+        next: console.log,
+        error: console.log,
+        complete: ({ key }) => {
+          const { text, selection } = DraftUtil.getMarkdownStateFromDraftState(
+            this.editorState
+          );
+          const { newText, insertionLength } = MarkdownUtil.insertText(
+            text,
+            "![",
+            selection.start
+          );
+          const finalText = MarkdownUtil.insertText(
+            newText,
+            `](${getCDNLink(key)})`,
+            selection.end + insertionLength
+          ).newText;
+
+          const result = DraftUtil.buildNewDraftState(this.editorState, {
+            text: finalText,
+            selection: {
+              start: selection.start + insertionLength,
+              end: selection.end + insertionLength
+            }
+          });
+          return resolve(result);
+        }
+      });
+    } catch (e) {
+      console.error(e);
+      return reject(e);
+    }
+  };
+
   render() {
     const { content, onChange } = this.props;
     const { maxSize, preview } = this.state;
@@ -102,7 +139,17 @@ class Editor extends Component {
           generateMarkdownPreview={markdown =>
             Promise.resolve(this.converter.makeHtml(markdown))
           }
+          buttonContentOptions={{
+            iconProvider: name => <i className={`fa fa-${name}`} />
+          }}
           commands={this.commands}
+        />
+        <input
+          style={{ display: "none" }}
+          ref={i => (this.input = i)}
+          type="file"
+          name="pic"
+          accept="image/*"
         />
       </Fragment>
     );

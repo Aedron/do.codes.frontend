@@ -1,6 +1,9 @@
 
 .editor {
   background-color: white;
+  &.mini {
+    height: calc(100% - 365px);
+  }
   &.max {
     position: fixed;
     width: 100%;
