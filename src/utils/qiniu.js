@@ -1,12 +1,7 @@
-import qiniu from "qiniu-js";
+import * as qiniu from "qiniu-js";
 import { noop } from "./";
 import { getUploadToken } from "./http";
-
-// async function fileToBlob(file) {
-//   const reader = new FileReader();
-//   reader.addEventListener('load', readFile);
-//   reader.readAsBlob(file);
-// }
+import { promiseWrapper } from "./index";
 
 async function upload(file, filename, token, subscribe = {}) {
   if (!token) {
@@ -14,15 +9,19 @@ async function upload(file, filename, token, subscribe = {}) {
     if (error) throw error;
     else token = data;
   }
+
   const observable = qiniu.upload(file, filename, token);
 
   return observable.subscribe({
-    ...subscribe,
     next: noop,
     error: noop,
-    complete: noop
+    complete: noop,
+    ...subscribe
   });
-  // return subscription.unsubscribe();
 }
 
-export { upload };
+function getCDNLink(key) {
+  return `http://pevwri600.bkt.clouddn.com/${key}`;
+}
+
+export { upload, getCDNLink };

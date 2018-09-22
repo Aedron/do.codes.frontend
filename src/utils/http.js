@@ -1,4 +1,5 @@
 import axios from "axios";
+import { promiseWrapper } from "./index";
 
 
 const DOMAIN = "http://127.0.0.1:3000";
@@ -35,8 +36,10 @@ function getPost(id) {
 }
 
 function getUploadToken() {
-  return httpWrapper(
-    axios.get(formatURL(`/api/upload_token`))
+  return promiseWrapper(
+    httpWrapper(
+      axios.get(formatURL(`/api/upload_token`))
+    )
   );
 }
 

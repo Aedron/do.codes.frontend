@@ -4,10 +4,9 @@ import { observer } from "mobx-react";
 import { withRouter } from "react-router-dom";
 
 import { withStore } from "../../store";
-import { upload } from "../../utils/qiniu";
+import { upload, getCDNLink } from "../../utils/qiniu";
 
 import "./index.scss";
-import { noop } from "../../utils";
 
 @withStore
 @withRouter
@@ -57,15 +56,20 @@ class PostEdit extends Component {
     this.input.click();
   };
 
-  onUploadChange = () => {
+  onUploadChange = async () => {
     const cover = this.input.files[0];
     if (!cover) return;
-    debugger;
-    return upload(cover, cover.name, null, {
-      next: console.log,
-      error: console.log,
-      complete: console.log
-    });
+    try {
+      await upload(cover, cover.name, null, {
+        next: console.log,
+        error: console.log,
+        complete: ({ key }) => {
+          this.setState({ cover: getCDNLink(key) });
+        }
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   render() {
@@ -93,7 +97,13 @@ class PostEdit extends Component {
             onChange={this.onChangeTags}
             placeholder="Tags"
           />
-          <div className="cover-upload" onClick={this.onUploadCover}>
+          <div
+            className="cover-upload"
+            onClick={this.onUploadCover}
+            style={{
+              backgroundImage: `url(${this.state.cover})`
+            }}
+          >
             <i className="fa fa-file-picture-o " />
             <p>上传封面</p>
           </div>
