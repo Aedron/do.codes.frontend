@@ -1,7 +1,6 @@
 import { observable, action } from "mobx";
 
-import { hoc, http, promiseWrapper } from "../utils";
-import { posts as mockPosts } from "../mock";
+import { hoc, http } from "../utils";
 
 class Store {
   constructor() {
@@ -38,7 +37,7 @@ class Store {
   postList = null;
   @action
   fetchPostList = async () => {
-    const [err, data] = await promiseWrapper(http.getPostList);
+    const [err, data] = await http.getPostList();
     this.postList = err ? [] : data;
   };
 
@@ -49,7 +48,7 @@ class Store {
   posts = {};
   @action
   fetchPost = async id => {
-    const [err, data] = await promiseWrapper(http.getPost(id));
+    const [err, data] = await http.getPost(id);
     if (err) {
       throw err;
     } else {

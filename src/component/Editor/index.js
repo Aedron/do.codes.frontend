@@ -51,7 +51,7 @@ class Editor extends Component {
           this.editorState = state;
           this.input.click();
           return new Promise((resolve, reject) => {
-            this.insertCallback = [resolve, resolve];
+            this.insertCallback = [resolve, reject];
           });
         }
       },

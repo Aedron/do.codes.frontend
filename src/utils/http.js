@@ -24,14 +24,18 @@ function httpWrapper(p) {
 
 
 function getPostList() {
-  return httpWrapper(
-    axios.get(formatURL(`/api/posts`))
+  return promiseWrapper(
+    httpWrapper(
+      axios.get(formatURL(`/api/posts`))
+    )
   );
 }
 
 function getPost(id) {
-  return httpWrapper(
-    axios.get(formatURL(`/api/post/${id}`))
+  return promiseWrapper(
+    httpWrapper(
+      axios.get(formatURL(`/api/post/${id}`))
+    )
   );
 }
 

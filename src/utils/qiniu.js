@@ -1,7 +1,6 @@
 import * as qiniu from "qiniu-js";
 import { noop } from "./";
 import { getUploadToken } from "./http";
-import { promiseWrapper } from "./index";
 
 async function upload(file, filename, token, subscribe = {}) {
   if (!token) {
