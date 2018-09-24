@@ -16,7 +16,8 @@ class PostEdit extends Component {
     loading: true,
     title: "",
     content: {
-      markdown: ""
+      markdown: "",
+      html: ""
     },
     tags: "",
     cover: "",

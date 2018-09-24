@@ -44,8 +44,16 @@ class Editor extends Component {
       ReactMdeCommands.strikethroughCommand
     ],
     [
+      ReactMdeCommands.orderedListCommand,
+      ReactMdeCommands.unorderedListCommand,
+      ReactMdeCommands.checkListCommand
+    ],
+    [
+      ReactMdeCommands.linkCommand,
+      ReactMdeCommands.quoteCommand,
+      ReactMdeCommands.codeCommand,
       {
-        buttonContentBuilder: ({ iconProvider }) => iconProvider("image"),
+        buttonContentBuilder: ({ iconProvider }) => iconProvider("photo"),
         buttonProps: { "aria-label": "插入图片" },
         execute: state => {
           this.editorState = state;
@@ -54,15 +62,7 @@ class Editor extends Component {
             this.insertCallback = [resolve, reject];
           });
         }
-      },
-      ReactMdeCommands.linkCommand,
-      ReactMdeCommands.quoteCommand,
-      ReactMdeCommands.codeCommand
-    ],
-    [
-      ReactMdeCommands.orderedListCommand,
-      ReactMdeCommands.unorderedListCommand,
-      ReactMdeCommands.checkListCommand
+      }
     ],
     [
       {
@@ -73,12 +73,16 @@ class Editor extends Component {
         }
       },
       {
-        buttonContentBuilder: ({ iconProvider }) =>
-          iconProvider("window-restore"),
+        buttonContentBuilder: ({ iconProvider }) => iconProvider("expand"),
         buttonProps: { "aria-label": "缩放" },
         execute: () => {
           this.setState({ maxSize: !this.state.maxSize });
         }
+      },
+      {
+        buttonContentBuilder: ({ iconProvider }) => iconProvider("send"),
+        buttonProps: { "aria-label": "发布" },
+        execute: () => {}
       }
     ]
   ];
