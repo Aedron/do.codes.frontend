@@ -56,7 +56,7 @@ module.exports = {
             loader: require.resolve("eslint-loader")
           }
         ],
-        include: paths.appSrc
+        include: [paths.appSrc, "node_modules/native-toast"]
       },
       {
         oneOf: [

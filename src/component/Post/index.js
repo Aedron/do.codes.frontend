@@ -30,14 +30,20 @@ class Post extends Component {
     this.setState({ post: data });
   }
 
+  renderPost = post => {
+    const { title, tags, cover, comments } = post;
+    return <div>1</div>;
+  };
+
   render() {
     const { post } = this.state;
+    console.log(post);
     return (
       <Fragment>
-        <div if={post} className="post">
+        <div if={post} className="post-111">
           {JSON.stringify(this.state.post)}
         </div>
-        <div else>Loading</div>
+        <div else>{this.renderPost(post)}</div>
       </Fragment>
     );
   }
