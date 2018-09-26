@@ -122,7 +122,8 @@ module.exports = {
             loader: require.resolve("eslint-loader")
           }
         ],
-        include: [paths.appSrc, "node_modules/native-toast"]
+        include: [paths.appSrc],
+        exclude: ["node_modules/native-toast"]
       },
       {
         // "oneOf" will traverse all following loaders until one will
@@ -142,7 +143,8 @@ module.exports = {
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
-            include: paths.appSrc,
+            include: [paths.appSrc],
+            exclude: ["node_modules/native-toast"],
             loader: require.resolve("babel-loader"),
             options: {
               compact: true
