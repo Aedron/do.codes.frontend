@@ -1,4 +1,6 @@
 
+@import "../../style/variable";
+
 .post-edit {
   position: fixed;
   width: 660px;
@@ -22,8 +24,19 @@
   }
   .tags-editor {
     height: 30px;
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 15px;
+    .react-tagsinput-input, .react-tagsinput-tag {
+      font-size: 16px;
+    }
+    .react-tagsinput-input {
+      width: 160px;
+    }
+    .react-tagsinput-tag {
+      background-color: $opacity;
+      color: gray;
+      border-color: gray;
+    }
   }
   .cover-upload {
     margin-bottom: 20px;

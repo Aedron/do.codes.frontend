@@ -1,12 +1,16 @@
 import React, { Component, Fragment } from "react";
 import { observer } from "mobx-react";
 import { withRouter } from "react-router-dom";
+import TagsInput from "react-tagsinput";
 
 import Editor from "../Editor";
+// import TagsInput from "../TagsInput";
 import { withStore } from "../../store";
+import * as toast from "../../utils/toast";
 import { upload, getCDNLink } from "../../utils/qiniu";
 
 import "./index.scss";
+import "react-tagsinput/react-tagsinput.css";
 
 @withStore
 @withRouter
@@ -19,7 +23,7 @@ class PostEdit extends Component {
       markdown: "",
       html: ""
     },
-    tags: "",
+    tags: [],
     cover: "",
     maxSize: false,
     preview: true
@@ -52,8 +56,8 @@ class PostEdit extends Component {
     this.setState({ title: e.target.value });
   };
 
-  onChangeTags = e => {
-    this.setState({ tags: e.target.value });
+  onChangeTags = tags => {
+    this.setState({ tags });
   };
 
   onUploadCover = () => {
@@ -76,6 +80,10 @@ class PostEdit extends Component {
     }
   };
 
+  onSave = () => {
+    toast.info("发布中，请稍候...");
+  };
+
   render() {
     const { loading, content, title, tags } = this.state;
     return (
@@ -93,13 +101,14 @@ class PostEdit extends Component {
             className="title-editor"
             value={title}
             onChange={this.onChangeTitle}
-            placeholder="Title"
+            placeholder="Title here..."
           />
-          <input
+          <TagsInput
             className="tags-editor"
+            onlyUnique
             value={tags}
             onChange={this.onChangeTags}
-            placeholder="Tags"
+            inputProps={{ placeholder: "Tags here..." }}
           />
           <div
             className="cover-upload"
@@ -111,7 +120,11 @@ class PostEdit extends Component {
             <i className="fa fa-file-picture-o " />
             <p>上传封面</p>
           </div>
-          <Editor content={content} onChange={this.onChangeContent} />
+          <Editor
+            content={content}
+            onChange={this.onChangeContent}
+            onSave={this.onSave}
+          />
         </div>
       </Fragment>
     );

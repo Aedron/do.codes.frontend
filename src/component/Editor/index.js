@@ -11,7 +11,8 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 class Editor extends Component {
   static propTypes = {
     content: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired
   };
 
   state = {
@@ -82,7 +83,7 @@ class Editor extends Component {
       {
         buttonContentBuilder: ({ iconProvider }) => iconProvider("send"),
         buttonProps: { "aria-label": "发布" },
-        execute: () => {}
+        execute: this.props.onSave
       }
     ]
   ];
