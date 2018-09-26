@@ -7,6 +7,7 @@ import Editor from "../Editor";
 // import TagsInput from "../TagsInput";
 import { withStore } from "../../store";
 import * as toast from "../../utils/toast";
+import * as http from "../../utils/http";
 import { upload, getCDNLink } from "../../utils/qiniu";
 
 import "./index.scss";
@@ -68,20 +69,68 @@ class PostEdit extends Component {
     const cover = this.input.files[0];
     if (!cover) return;
     try {
+      toast.info("正在上传封面...");
       await upload(cover, cover.name, null, {
         next: console.log,
         error: console.log,
         complete: ({ key }) => {
+          setTimeout(() => {
+            toast.ok("上传完成");
+          }, 1000);
           this.setState({ cover: getCDNLink(key) });
         }
       });
     } catch (e) {
       console.error(e);
+      toast.err(`上传出错 - ${e.toString()}`);
     }
   };
 
-  onSave = () => {
+  onSave = async () => {
+    if (!this.checkContentValid()) return;
     toast.info("发布中，请稍候...");
+    const {
+      title,
+      content: { markdown },
+      cover,
+      tags
+    } = this.state;
+    const [err, data] = await http.createPost({
+      title,
+      content: markdown,
+      cover,
+      tags
+    });
+    if (err) {
+      return toast.err(`发布失败 - ${err.toString()}`);
+    }
+    toast.ok(`发布成功`);
+  };
+
+  checkContentValid = () => {
+    const {
+      title,
+      tags,
+      cover,
+      content: { markdown }
+    } = this.state;
+    if (!title.trim()) {
+      toast.err("请输入标题");
+      return false;
+    }
+    if (tags.length === 0) {
+      toast.err("请设置标签");
+      return false;
+    }
+    if (!cover) {
+      toast.err("请上传封面");
+      return false;
+    }
+    if (!markdown.trim()) {
+      toast.err("请输入内容");
+      return false;
+    }
+    return true;
   };
 
   render() {
@@ -111,7 +160,9 @@ class PostEdit extends Component {
             inputProps={{ placeholder: "Tags here..." }}
           />
           <div
-            className="cover-upload"
+            className={`cover-upload ${
+              this.state.cover.trim() ? "uploaded" : ""
+            }`}
             onClick={this.onUploadCover}
             style={{
               backgroundImage: `url(${this.state.cover})`

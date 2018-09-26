@@ -47,9 +47,18 @@ function getUploadToken() {
   );
 }
 
+function createPost(data) {
+  return promiseWrapper(
+    httpWrapper(
+      axios.post(formatURL(`/api/posts`), data)
+    )
+  );
+}
+
 
 export {
   getPostList,
   getPost,
-  getUploadToken
+  getUploadToken,
+  createPost
 };

@@ -12,7 +12,12 @@ function PostCard({ post }) {
   return (
     <Link to={`/post/${id}`} className="post-card">
       <div className="cover-container">
-        <img className="cover" src={cover} alt={title} />
+        <div
+          className="cover"
+          style={{
+            backgroundImage: `url(${cover})`
+          }}
+        />
       </div>
       <div className="post-card-info">
         <h3 className="title">{title}</h3>

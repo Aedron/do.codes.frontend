@@ -11,4 +11,9 @@
     left: 0;
     top: 0;
   }
+  .mde-preview-content {
+    img {
+      max-width: 100%;
+    }
+  }
 }
