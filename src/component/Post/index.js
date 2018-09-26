@@ -1,15 +1,16 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { observer } from "mobx-react";
 import { withRouter } from "react-router-dom";
 
 import { withStore } from "../../store";
 
 import "./index.scss";
+import * as toast from "../../utils/toast";
 
 @withStore
 @withRouter
 @observer
-class Post extends PureComponent {
+class Post extends Component {
   state = {
     post: null
   };
@@ -22,7 +23,11 @@ class Post extends PureComponent {
       }
     } = this.props;
 
-    this.setState({ post: await store.getPost(id) });
+    const [err, data] = await store.fetchPost(id);
+    if (err) {
+      return toast.err(`拉取文章数据失败 - ${err.toString()}`);
+    }
+    this.setState({ post: data });
   }
 
   render() {

@@ -49,16 +49,18 @@ class Store {
   @action
   fetchPost = async id => {
     const [err, data] = await http.getPost(id);
-    if (err) {
-      throw err;
-    } else {
+    if (!err) {
       this.posts[id] = data;
     }
-    return data;
+    return [err, data];
   };
   @action
   getPost = id => {
-    return this.posts[id] || this.fetchPost(id);
+    return [null, this.posts[id]] || this.fetchPost(id);
+  };
+  @action
+  clearPostCache = id => {
+    delete this.posts[id];
   };
 }
 

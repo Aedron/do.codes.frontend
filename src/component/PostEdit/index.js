@@ -32,8 +32,11 @@ class PostEdit extends Component {
 
   input = null;
 
+  get id() {
+    return this.props.match.params.id;
+  }
   get isNew() {
-    return !this.props.match.params.id;
+    return !this.id;
   }
 
   componentDidMount() {
@@ -45,8 +48,22 @@ class PostEdit extends Component {
     this.input.addEventListener("change", this.onUploadChange);
   }
 
-  getPostData = () => {
-    // TODO
+  getPostData = async () => {
+    const [err, data] = await this.props.store.fetchPost(this.id);
+    if (err) {
+      return toast.err(`拉取文章数据失败 - ${err.toString()}`);
+    }
+    const { content, cover, tags, title } = data;
+    this.setState({
+      loading: false,
+      title,
+      content: {
+        markdown: content,
+        html: ""
+      },
+      tags,
+      cover
+    });
   };
 
   onChangeContent = content => {
@@ -95,7 +112,7 @@ class PostEdit extends Component {
       cover,
       tags
     } = this.state;
-    const [err, data] = await http.createPost({
+    const [err] = await http.createPost({
       title,
       content: markdown,
       cover,
@@ -104,6 +121,7 @@ class PostEdit extends Component {
     if (err) {
       return toast.err(`发布失败 - ${err.toString()}`);
     }
+    this.props.store.clearPostCache(this.id);
     toast.ok(`发布成功`);
   };
 
