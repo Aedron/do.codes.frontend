@@ -28,6 +28,21 @@ function sliceText(text, max, sunfix = "...") {
   return text.slice(0, max) + sunfix;
 }
 
+function formatDate(date) {
+  const monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${monthNames[monthIndex]} ${day}, ${year}`;
+}
+
 function noop() {}
 
-export { hoc, http, promiseWrapper, sliceText, noop };
+export { hoc, http, promiseWrapper, sliceText, formatDate, noop };

@@ -5,6 +5,7 @@ import { Converter } from "showdown";
 import "showdown-highlightjs-extension";
 
 import { withStore } from "../../store";
+import { formatDate } from "../../utils";
 import * as toast from "../../utils/toast";
 
 import "./index.scss";
@@ -38,7 +39,8 @@ class Post extends Component {
   }
 
   static renderPost = post => {
-    const { title, tags, cover, comments, content } = post;
+    const { title, tags, cover, comments, content, created } = post;
+    const date = formatDate(new Date(created));
     return (
       <Fragment>
         <h1 className="title">{title}</h1>
@@ -56,6 +58,8 @@ class Post extends Component {
             }}
           />
         </div>
+        <div className="info">{date.toUpperCase()}</div>
+        <hr />
       </Fragment>
     );
   };
