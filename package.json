@@ -22,7 +22,8 @@
     "react-router-dom": "^4.3.1",
     "react-tag-input": "^5.2.2",
     "react-tagsinput": "^3.19.0",
-    "showdown": "^1.8.6"
+    "showdown": "^1.8.6",
+    "showdown-highlightjs-extension": "^0.1.2"
   },
   "devDependencies": {
     "@types/qiniu": "^7.0.1",

@@ -1,17 +1,16 @@
-import React, {PureComponent} from 'react';
-import {observer} from 'mobx-react';
-import {withStore} from "../../store";
+import React, { Component } from "react";
+import { observer } from "mobx-react";
+import { withStore } from "../../store";
 
-import PostCard from './PostCard';
+import PostCard from "./PostCard";
 
-import './index.scss';
-
+import "./index.scss";
 
 @withStore
 @observer
-class Posts extends PureComponent {
+class Posts extends Component {
   static renderPost(post) {
-    return <PostCard key={post.title} post={post}/>;
+    return <PostCard key={post.title} post={post} />;
   }
 
   componentDidMount() {
@@ -20,18 +19,14 @@ class Posts extends PureComponent {
   }
 
   render() {
-    const {store} = this.props;
-    const {postList} = store;
+    const { store } = this.props;
+    const { postList } = store;
     return (
-      <div
-        if={postList}
-        className="posts"
-      >
+      <div if={postList} className="posts">
         {postList.map(Posts.renderPost)}
       </div>
     );
   }
 }
-
 
 export default Posts;

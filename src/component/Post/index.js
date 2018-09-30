@@ -1,11 +1,18 @@
 import React, { Component, Fragment } from "react";
 import { observer } from "mobx-react";
 import { withRouter } from "react-router-dom";
+import { Converter } from "showdown";
+import "showdown-highlightjs-extension";
 
 import { withStore } from "../../store";
+import * as toast from "../../utils/toast";
 
 import "./index.scss";
-import * as toast from "../../utils/toast";
+
+const convert = new Converter({
+  extensions: ["highlightjs"],
+  ghCodeBlocks: true
+});
 
 @withStore
 @withRouter
@@ -30,20 +37,39 @@ class Post extends Component {
     this.setState({ post: data });
   }
 
-  renderPost = post => {
-    const { title, tags, cover, comments } = post;
-    return <div>1</div>;
+  static renderPost = post => {
+    const { title, tags, cover, comments, content } = post;
+    return (
+      <Fragment>
+        <h1 className="title">{title}</h1>
+        <div className="tags">
+          {tags.map(t => (
+            <span key={t}># {t}</span>
+          ))}
+        </div>
+        <div className="mde-preview">
+          <div
+            className="mde-preview-content"
+            id="content"
+            dangerouslySetInnerHTML={{
+              __html: convert.makeHtml(content)
+            }}
+          />
+        </div>
+      </Fragment>
+    );
   };
 
   render() {
     const { post } = this.state;
-    console.log(post);
     return (
       <Fragment>
-        <div if={post} className="post-111">
-          {JSON.stringify(this.state.post)}
+        <div if={post} className="post-container">
+          {Post.renderPost(post)}
         </div>
-        <div else>{this.renderPost(post)}</div>
+        <div else className="post-111">
+          Loading...
+        </div>
       </Fragment>
     );
   }
