@@ -1,7 +1,7 @@
 {
   "presets": [
     ["react-app"],
-    ["env", {
+    ["@babel/preset-env", {
       "useBuiltIns": "entry",
       "targets": {
         "browsers": ["last 2 Chrome versions"]
@@ -9,8 +9,8 @@
     }]
   ],
   "plugins": [
-    ["transform-decorators-legacy"],
-    ["transform-class-properties"],
+    ["@babel/plugin-proposal-decorators", {"legacy": true}],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     ["mobx-deep-action"],
     ["jsx-if-directive"]
   ]
